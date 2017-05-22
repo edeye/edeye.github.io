@@ -1,6 +1,82 @@
 <!DOCTYPE html>
 <html>
-<body>
-<h1>这是我使用github pages搭建的个人站点。</h1>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Edeye | Show</title>
+  
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  
+	<link href="/static/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/animate/animate.min.css" rel="stylesheet">
+    <link href="/static/edeye/granim/1.0.6/cv.css" rel="stylesheet">
+    
+    <link href="/static/edeye/css/login.css" rel="stylesheet">
+
+	<!--[if lt IE 9]>
+		<script src="/static/html5shiv/3.7.3/html5shiv.min.js"></script>
+		<script src="/static/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	<link rel="shortcut icon" href="/favicon.ico">
+</head>
+
+<!-- ================================================================ -->
+<!-- ===========================   BODY   =========================== -->
+<!-- ================================================================ -->
+
+<body id="body-main" class="gray-bg">
+
+<div id="particles-js" style="position:absolute;z-index:-100;width: 100%;height: 99%"></div>
+
+<canvas id="canvas-radial" style="position:absolute;z-index:-110;width: 100%;height: 100%"></canvas>
+
+<div id="login-main" class="middle-box text-center loginscreen animated fadeIn">
+	<div>
+		<h4 class="logo-name">Edeye</h1>
+	</div>
+	
+	<h3 class="danceWord-s3">欢迎登录组织机构认证系统</h3>
+	<p id="isee" class="danceWord-s2">눈﹏눈</span></p>
+	
+	<p class="m-t"><small>aft &copy; 2017</small></p>
+</div>
+
+<!-- ================================================================ -->
+<!-- ===========================    JS    =========================== -->
+<!-- ================================================================ -->
+
+<script src="/static/jquery/3.2.1/jquery-3.2.1.min.js"></script>
+<script src="/static/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<script src="/static/particles/2.0.0/particles.min.js"></script>
+<script src="/static/particles/2.0.0/app.js"></script>
+
+<script src="/static/edeye/danceWord/d.js"></script>
+<script src="/static/edeye/granim/1.0.6/granim.min.js"></script>
+
+<script>
+	$(function () {
+		
+		var granimInstance = new Granim({
+			element: '#canvas-radial',
+			name: 'radial-gradient',
+			direction: 'radial',
+			opacity: [1, 1],
+			isPausedWhenNotInView: true,
+			states : {
+				"default-state": {
+					gradients: [
+						['#f3f3f4', '#f3f3f4'],
+						['#83a4d4', '#b6fbff'],
+						['#9D50BB', '#f3f3f4']
+					]
+				}
+			}
+		});
+	});
+</script>
+
+
 </body>
 </html>

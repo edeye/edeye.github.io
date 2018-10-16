@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <body>
+	<canvas id="c" style="border:1px solid red"></canvas>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="fabric.js"></script>
+	<script>
+	
+	$(function(){
+		var canvasInit = document.getElementById("c");
+		canvasInit.width = 1200;
+		canvasInit.height = 710;
+		init();
+	});
+	
+	function init(){
+		var canvas = new fabric.Canvas('c');
+		
+		var sfs = [];
+		
+		sfs.push(getRect(40,10,'lightgrey',80,320));
+		sfs.push(getRect(160,10,'lightgrey',80,320));
+		sfs.push(getRect(280,10,'lightgrey',80,320));
+		sfs.push(getRect(400,10,'lightgrey',80,320));
+		sfs.push(getRect(520,10,'lightgrey',80,320));
+		sfs.push(getRect(640,10,'lightgrey',80,320));
+		sfs.push(getRect(760,50,'lightgrey',80,280));
+		sfs.push(getRect(880,10,'lightgrey',80,320));
+		sfs.push(getRect(1000,10,'lightgrey',80,320));
+		sfs.push(getRect(1120,10,'lightgrey',40,320));
+		
+		sfs.push(getRect(40,  370,'lightgrey',80,320));
+		sfs.push(getRect(160, 370,'lightgrey',80,320));
+		sfs.push(getRect(280, 370,'lightgrey',80,320));
+		sfs.push(getRect(400, 370,'lightgrey',80,320));
+		sfs.push(getRect(520, 370,'lightgrey',80,320));
+		sfs.push(getRect(640, 370,'lightgrey',80,320));
+		sfs.push(getRect(760, 370,'lightgrey',80,320));
+		sfs.push(getRect(880, 370,'lightgrey',80,320));
+		sfs.push(getRect(1000,370,'lightgrey',80,320));
+		sfs.push(getRect(1120,370,'lightgrey',40,320));
+
+		for(var tmpKey in sfs){
+			canvas.add(sfs[tmpKey]);
+			sfs[tmpKey].set('selectable', false);
+			sfs[tmpKey].set({ strokeWidth: 2, stroke: 'rgba(100,200,200,0.5)' });
+		}
+		
+		var bowls = [];
+		bowls.push(getRect(40,10,'lightgreen',40, 	40,'1'));
+		bowls.push(getRect(40,50,'lightgreen',40, 	40,'2'));
+		bowls.push(getRect(40,90,'lightgreen',40, 	40,'3'));
+		bowls.push(getRect(40,130,'lightgreen',40, 	40,'4'));
+		bowls.push(getRect(40,170,'lightgreen',40, 	40,'5'));
+		bowls.push(getRect(40,210,'lightgreen',40, 	40,'6'));
+		bowls.push(getRect(40,250,'lightgreen',40, 	40,'7'));
+		bowls.push(getRect(40,290,'lightgreen',40, 	40,'8'));
+		bowls.push(getRect(80,10,'lightgreen',40, 	40,'8'));
+		bowls.push(getRect(80,50,'lightgreen',40, 	40,'7'));
+		bowls.push(getRect(80,90,'lightgreen',40, 	40,'6'));
+		bowls.push(getRect(80,130,'lightgreen',40, 	40,'5'));
+		bowls.push(getRect(80,170,'lightgreen',40, 	40,'4'));
+		bowls.push(getRect(80,210,'lightgreen',40, 	40,'3'));
+		bowls.push(getRect(80,250,'lightgreen',40, 	40,'2'));
+		bowls.push(getRect(80,290,'lightgreen',40, 	40,'1'));
+
+
+		for(var tmpKey in bowls){
+			canvas.add(bowls[tmpKey]);
+			bowls[tmpKey].set('selectable', false);
+			bowls[tmpKey].set({ strokeWidth: 2, stroke: 'rgba(122,122,122,0.5)' });
+		}
+		
+		var pathStr = 'M 1180 350 L 20 350 M 20 350 L 20 30 M 20 30 L 40 30 M 40 30 L 30 35 M 40 30 L 30 25';
+		// var pathStr = 'M 40 40 L 194 192 M 168 177 L 194 192 L 168 207';
+		var path = new fabric.Path(pathStr, {
+          stroke: 'red',
+          fill: "rgba(255,255,255,0)",
+          strokeWidth: 2,
+		  selectable: false
+        });
+		
+		// path.set({ left: 1180, top: 350 });
+		// path.set({ left: 0, top: 0 });
+		canvas.add(path);
+		
+	}
+	
+	var LabeledRect = fabric.util.createClass(fabric.Rect, {
+		type: 'labeledRect',
+
+		initialize: function(options) {
+			options || (options = { });
+
+			this.callSuper('initialize', options);
+			this.set('label', options.label || '');
+		},
+
+		toObject: function() {
+			return fabric.util.object.extend(this.callSuper('toObject'), {
+				label: this.get('label')
+			});
+		},
+
+		_render: function(ctx) {
+			this.callSuper('_render', ctx);
+			ctx.font = '20px Helvetica';
+			ctx.fillStyle = '#333';
+			ctx.fillText(this.label, (-this.width/2 + 15), -this.height/2 + 25);
+		}
+	});
+	
+	function getRect(left,top,fill,width,height,name){
+		if(name === undefined){
+			return new fabric.Rect({
+				left: left,
+				top: top,
+				fill: fill,
+				width: width,
+				height: height
+			});
+		}else{
+			return new LabeledRect({
+				width: width,
+				height: height,
+				left: left,
+				top: top,
+				label: name,
+				fill: fill
+			});
+		}
+		
+	}
+		
+	</script>
+  </body>
+</html>
